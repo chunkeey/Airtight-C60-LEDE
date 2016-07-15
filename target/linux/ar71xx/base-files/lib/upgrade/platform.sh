@@ -476,6 +476,7 @@ platform_check_image() {
 		merakinand_do_platform_check $board $1
 		return $?;
 		;;
+	c-60 | \
 	nbg6716 | \
 	r6100 | \
 	wndr3700v4 | \
@@ -537,6 +538,7 @@ platform_pre_upgrade() {
 	local board=$(ar71xx_board_name)
 
 	case "$board" in
+	c-60 | \
 	nbg6716 | \
 	r6100 | \
 	wndr3700v4 | \

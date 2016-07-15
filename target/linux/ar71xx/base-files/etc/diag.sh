@@ -64,6 +64,9 @@ get_status_led() {
 	c-55)
 		status_led="c-55:green:pwr"
 		;;
+	c-60)
+		status_led="c-60:green:pwr"
+		;;
 	cap4200ag)
 		status_led="senao:green:pwr"
 		;;

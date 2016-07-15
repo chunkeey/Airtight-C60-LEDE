@@ -290,6 +290,11 @@ onion-omega)
 	ucidef_set_interface_lan "wlan0"
 	;;
 
+c-60)
+	ucidef_add_switch "switch0" \
+		"0@eth0" "3:wan" "4:lan"
+	;;
+
 dhp-1565-a1 |\
 dir-835-a1 |\
 wndr3700v4 | \
