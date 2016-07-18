@@ -2110,26 +2110,6 @@ ar8xxx_phy_match(u32 phy_id)
 	return false;
 }
 
-static bool
-ar8xxx_is_possible(struct mii_bus *bus)
-{
-	unsigned i;
-
-	for (i = 0; i < 4; i++) {
-		u32 phy_id;
-
-		phy_id = mdiobus_read(bus, i, MII_PHYSID1) << 16;
-		phy_id |= mdiobus_read(bus, i, MII_PHYSID2);
-		if (!ar8xxx_phy_match(phy_id)) {
-			pr_debug("ar8xxx: unknown PHY at %s:%02x id:%08x\n",
-				 dev_name(&bus->dev), i, phy_id);
-			return false;
-		}
-	}
-
-	return true;
-}
-
 static int
 ar8xxx_phy_probe(struct phy_device *phydev)
 {
@@ -2139,9 +2119,6 @@ ar8xxx_phy_probe(struct phy_device *phydev)
 
 	/* skip PHYs at unused adresses */
 	if (phydev->addr != 0 && phydev->addr != 4)
-		return -ENODEV;
-
-	if (!ar8xxx_is_possible(phydev->bus))
 		return -ENODEV;
 
 	mutex_lock(&ar8xxx_dev_list_lock);
